@@ -12,7 +12,7 @@ export async function createMealController(
         name: z.string(),
         isFitness: z.boolean(),
         description: z.string(),
-        dateAndHour: z.date(),
+        dateAndHour: z.string(),
     });
 
     const { name, description, isFitness, dateAndHour } =
@@ -27,7 +27,7 @@ export async function createMealController(
             name,
             description,
             isFitness,
-            dateAndHour,
+            dateAndHour: new Date(dateAndHour),
             userId: request.user.sub,
         });
 
