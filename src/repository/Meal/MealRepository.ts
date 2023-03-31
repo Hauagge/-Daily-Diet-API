@@ -47,4 +47,12 @@ export class MealRepository implements IMealRepository {
             },
         });
     }
+
+    async delete(id: string): Promise<Meal> {
+        return await prisma.meal.delete({
+            where: {
+                id: id,
+            },
+        });
+    }
 }
