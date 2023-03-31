@@ -16,6 +16,7 @@ interface IMealRepository {
         isFitness,
         dateAndHour,
     }: Prisma.MealUncheckedUpdateInput): Promise<Meal>;
+    delete(id: string): Promise<Meal>;
 }
 
 export { IMealRepository };
