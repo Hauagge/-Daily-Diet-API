@@ -4,16 +4,16 @@ import { z } from 'zod';
 import { MealRepository } from '../../repository/Meal/MealRepository';
 import { UpdateMealUseCase } from '../../useCases/Meal/UpdateMealUseCase';
 
-export async function createMealController(
+export async function updateMealController(
     request: FastifyRequest,
     reply: FastifyReply
 ) {
     const authenticateBodySchema = z.object({
         mealId: z.string(),
-        name: z.string(),
-        isFitness: z.boolean(),
-        description: z.string(),
-        dateAndHour: z.date(),
+        name: z.string().optional(),
+        isFitness: z.boolean().optional(),
+        description: z.string().optional(),
+        dateAndHour: z.string().optional(),
     });
 
     const { mealId, name, description, isFitness, dateAndHour } =
