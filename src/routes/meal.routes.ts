@@ -6,4 +6,5 @@ import { updateMealController } from '../controller/Meal/UpdateMealController';
 export async function MealRoutes(app: FastifyInstance, options: any) {
     app.post('/meal', { onRequest: [verifyJwt] }, createMealController);
     app.put('/meal', { onRequest: [verifyJwt] }, updateMealController);
+    app.delete('/meal', { onRequest: [verifyJwt] }, updateMealController);
 }
