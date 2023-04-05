@@ -11,6 +11,7 @@ class CreateMealUseCase {
         dateAndHour,
         userId,
     }: Prisma.MealUncheckedCreateInput) {
+        const removedThreHours = new Date(dateAndHour);
         const meal = await this.mealRepository.create({
             name,
             description,

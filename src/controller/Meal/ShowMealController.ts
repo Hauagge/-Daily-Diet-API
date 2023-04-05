@@ -2,24 +2,23 @@ import { FastifyReply, FastifyRequest } from 'fastify';
 import { z } from 'zod';
 
 import { MealRepository } from '../../repository/Meal/MealRepository';
-import { DeleteMealUseCase } from '../../useCases/Meal/DeleteMealUseCase';
+import { ShowMealUseCase } from '../../useCases/Meal/ShowMealUseCase';
 
-async function deleteMealController(
+async function showMealController(
     request: FastifyRequest,
     reply: FastifyReply
 ) {
-    const deleteBodySchema = z.object({
+    const authenticateBodySchema = z.object({
         mealId: z.string(),
     });
-
     const userId = request.user.sub;
-    const { mealId } = deleteBodySchema.parse(request.params);
+    const { mealId } = authenticateBodySchema.parse(request.params);
 
     try {
         const mealRepository = new MealRepository();
 
-        const deleteMealUseCase = new DeleteMealUseCase(mealRepository);
-        const { meal } = await deleteMealUseCase.execute({
+        const showMealUseCase = new ShowMealUseCase(mealRepository);
+        const { meal } = await showMealUseCase.execute({
             userId,
             id: mealId,
         });
@@ -31,4 +30,5 @@ async function deleteMealController(
         return reply.status(400).send({ message: err.message });
     }
 }
-export { deleteMealController };
+
+export { showMealController };

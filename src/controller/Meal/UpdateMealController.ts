@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { MealRepository } from '../../repository/Meal/MealRepository';
 import { UpdateMealUseCase } from '../../useCases/Meal/UpdateMealUseCase';
 
-export async function updateMealController(
+async function updateMealController(
     request: FastifyRequest,
     reply: FastifyReply
 ) {
@@ -40,3 +40,5 @@ export async function updateMealController(
         return reply.status(400).send({ message: err.message });
     }
 }
+
+export { updateMealController };

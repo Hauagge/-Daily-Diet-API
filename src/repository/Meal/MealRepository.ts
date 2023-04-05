@@ -55,4 +55,24 @@ export class MealRepository implements IMealRepository {
             },
         });
     }
+
+    async findManyByUserId(userId: string): Promise<Meal[]> {
+        return await prisma.meal.findMany({
+            where: {
+                userId: userId,
+            },
+            orderBy: {
+                dateAndHour: 'desc',
+            },
+        });
+    }
+
+    async mealOnDiet(userId: string): Promise<Meal[]> {
+        return await prisma.meal.findMany({
+            where: {
+                userId: userId,
+                isFitness: true,
+            },
+        });
+    }
 }
